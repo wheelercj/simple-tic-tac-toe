@@ -3,7 +3,7 @@
 using namespace std;
 
 void display(char[]);
-void aiMain(char[], bool&);
+void compTurn(char[], bool&);
 bool connectThree(char[], char);
 
 int main()
@@ -12,20 +12,19 @@ int main()
 		tieCount = 0;
 	bool gameOver = false;
 	srand((unsigned)time(0));
-	char marks[11], // the Xs and Os
+	char marks[11], // the Xs and Os. marks[0] is not used so that the element number coincides with the input
 		choice;
 
-	// initialize marks with spaces. marks[0] is not used so that the element number coincides with the input
 	for (int i = 1; i < 10; i++)
 		marks[i] = ' ';
 
-	cout << "\n Tic-Tac-Toe!\n\n Use your number pad to choose a space. \n\n    |   |\n "
+	cout << "\n Tic-Tac-Toe!\n\n Directions: \n\n    |   |\n "
 		" 7 | 8 | 9\n -----------\n    |   |\n  4 | 5 | 6\n    |   |\n -----------\n  1 | 2 | 3\n    |   |\n";
 	display(marks);
 
 	while (true) // each iteration of this loop is one round of the game
 	{
-		cout << "       Player's turn";
+		cout << "       Your turn";
 
 		do
 		{
@@ -46,7 +45,7 @@ int main()
 		else
 		{
 			cout << "       Computer's turn ";
-			aiMain(marks, gameOver);
+			compTurn(marks, gameOver);
 			display(marks);
 
 			if (gameOver)
@@ -59,8 +58,7 @@ int main()
 		if (gameOver)
 		{
 			cout << "\n\n\n Your wins: 0 \n Your losses: " << lossCount << "\n Ties: " << tieCount << "\n\n\n Play again? (1/0) ";
-			// winCount variable not needed as the player cannot win
-
+			                     //   ;)
 			do
 			{
 				cout << "\n> ";
@@ -85,7 +83,7 @@ void display(char marks[])
 		<< "\n    |   |\n -----------\n  " << marks[1] << " | " << marks[2] << " | " << marks[3] << "\n    |   |";
 }
 
-void aiMain(char marks[], bool& gameOver)
+void compTurn(char marks[], bool& gameOver)
 {
 	int p;
 
@@ -151,9 +149,11 @@ void aiMain(char marks[], bool& gameOver)
 bool connectThree(char marks[], char letter)
 {
 	// the sequence array holds every possible combination of 3 elements that form a line
-	int sequence[] = { 1, 2, 3,  4, 5, 6,  7, 8, 9,  1, 4, 7,  2, 5, 8,  3, 6, 9,  1, 5, 9,  3, 5, 7,
-                           2, 3, 1,  5, 6, 4,  8, 9, 7,  4, 7, 1,  5, 8, 2,  6, 9, 3,  5, 9, 1,  5, 7, 3,
-                           3, 1, 2,  6, 4, 5,  9, 7, 8,  7, 1, 4,  8, 2, 5,  9, 3, 6,  9, 1, 5,  7, 3, 5 };
+	int sequence[] = {
+		1, 2, 3,  4, 5, 6,  7, 8, 9,  1, 4, 7,  2, 5, 8,  3, 6, 9,  1, 5, 9,  3, 5, 7,
+		2, 3, 1,  5, 6, 4,  8, 9, 7,  4, 7, 1,  5, 8, 2,  6, 9, 3,  5, 9, 1,  5, 7, 3,
+		3, 1, 2,  6, 4, 5,  9, 7, 8,  7, 1, 4,  8, 2, 5,  9, 3, 6,  9, 1, 5,  7, 3, 5
+	};
 
 	for (int i = 0; i < 70; i += 3)
 	{
